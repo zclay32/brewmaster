@@ -17,7 +17,7 @@ export default class TimerPieChart extends React.Component {
         ]}
         lineWidth={10}
         startAngle={270}
-        totalValue={this.state.totalTime}
+        totalValue={this.props.totalTime}
       />
     );
   }

@@ -10,7 +10,8 @@ export default class Timer extends React.Component {
       start: Date.now(),
       interval: 300,
       running: false,
-      totalTime: new Date().setHours(1)
+      totalTime: 60 * 60 * 1000,
+      timeElapsed: 0,
     };
   }
 
@@ -33,7 +34,10 @@ export default class Timer extends React.Component {
 
   doWork = () => {
     if (this.state.running && this.state.start != null) {
-      this.updateTimeAmounts(Date.now() - this.state.start);
+      let timeElapsed = Date.now() - this.state.start;
+      this.setState({timeElapsed: timeElapsed});
+      
+      this.updateTimeAmounts(timeElapsed);
 
       setTimeout(this.doWork, this.state.interval);
     }
@@ -77,7 +81,7 @@ export default class Timer extends React.Component {
             <TimerButton name="Stop" clickHandle={this.handleStopOnClick} />
           </div>
           <div className="pieSection">
-            <TimerPieChart timeElapsed={this.state.timeElapsed} />
+            <TimerPieChart timeElapsed={this.state.timeElapsed} totalTime={this.state.totalTime}/>
           </div>
         </div>
       </div>
