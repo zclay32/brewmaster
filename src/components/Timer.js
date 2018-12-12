@@ -1,4 +1,6 @@
 import React from "react";
+import TimerButton from "../components/TimerButton";
+import TimerPieChart from "../components/TimerPieChart";
 
 export default class Timer extends React.Component {
   constructor(props) {
@@ -7,10 +9,9 @@ export default class Timer extends React.Component {
     this.state = {
       start: Date.now(),
       interval: 300,
-      running: false
+      running: false,
+      totalTime: new Date().setHours(1)
     };
-
-    this.updateTimeAmounts(Date.now() - this.state.start);
   }
 
   handleStartOnClick = () => {
@@ -61,32 +62,23 @@ export default class Timer extends React.Component {
           <table className="ui timer">
             <tbody>
               <tr>
-                <td>{this.state.elapsedHours}</td>
+                <td>{this.state.elapsedHours || "00"}</td>
                 <td>:</td>
-                <td>{this.state.elapsedMinutes}</td>
+                <td>{this.state.elapsedMinutes || "00"}</td>
                 <td>:</td>
-                <td>{this.state.elapsedSeconds}</td>
+                <td>{this.state.elapsedSeconds || "00"}</td>
                 <td>.</td>
-                <td>{this.state.elapsedMilliseconds}</td>
-              </tr>
-              <tr>
-                <div className="buttonSection">
-                  <button
-                    className="ui labeled icon button"
-                    onClick={this.handleStartOnClick}
-                  >
-                    Start
-                  </button>
-                  <button
-                    className="ui labeled icon button"
-                    onClick={this.handleStopOnClick}
-                  >
-                    Stop
-                  </button>
-                </div>
+                <td>{this.state.elapsedMilliseconds || "0"}</td>
               </tr>
             </tbody>
           </table>
+          <div className="buttonSection">
+            <TimerButton name="Start" clickHandle={this.handleStartOnClick} />
+            <TimerButton name="Stop" clickHandle={this.handleStopOnClick} />
+          </div>
+          <div className="pieSection">
+            <TimerPieChart timeElapsed={this.state.timeElapsed} />
+          </div>
         </div>
       </div>
     );
