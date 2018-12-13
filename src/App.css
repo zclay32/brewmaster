@@ -38,7 +38,7 @@
 .timer {
   padding: 10px;
   font-size: 48pt;
-  margin: auto;
+  display: block;
 }
 
 td {
@@ -46,5 +46,16 @@ td {
 }
 
 .buttonSection {
-  margin: auto;
+  text-align: center;
+}
+
+.pieChart {
+  margin: 10px;
+  max-width: 100px;
+}
+
+.label {
+  font-size: 10pt;
+  text-align: center;
+  display: block;
 }
